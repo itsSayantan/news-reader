@@ -1,0 +1,53 @@
+{
+    "name": "news-reader",
+    "version": "1.0.0",
+    "description": "A news reader application which makes use of the intersection observer web api.",
+    "main": "dist/bundle.js",
+    "scripts": {
+        "test": "jest --no-watch",
+        "lint": "eslint .",
+        "start": "NODE_ENV='development' webpack-dev-server --config ./config/webpack.config.js",
+        "react:build": "NODE_ENV='production' webpack --config ./config/webpack.config.js"
+    },
+    "keywords": [
+        "news",
+        "reader",
+        "news-reader",
+        "intersection-observer",
+        "intersection",
+        "observer",
+        "web",
+        "api"
+    ],
+    "author": "Sayantan Ghosh <sayantan.ghosh03@gmail.com> (https://github.com/itsSayantan)",
+    "license": "MIT",
+    "dependencies": {
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "webpack": "^4.41.5"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+        "@babel/preset-env": "^7.7.7",
+        "@babel/preset-react": "^7.7.4",
+        "@types/react": "^16.9.17",
+        "@types/react-dom": "^16.9.4",
+        "autoprefixer": "^9.7.3",
+        "css-loader": "^3.4.0",
+        "husky": "^3.1.0",
+        "jest": "^24.9.0",
+        "node-sass": "^4.13.0",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^8.0.0",
+        "style-loader": "^1.1.2",
+        "ts-loader": "^6.2.1",
+        "typescript": "^3.7.4",
+        "webpack-cli": "^3.3.10",
+        "webpack-dev-server": "^3.10.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn test"
+        }
+    }
+}
