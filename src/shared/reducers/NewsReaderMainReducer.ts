@@ -3,7 +3,8 @@ import { StateType, ActionType } from '@Shared/types';
 const createInitialState = (initialState: Array<string>): StateType => {
     return {
         news: initialState,
-        pageNo: 1
+        pageNo: 1,
+        totalResults: -1
     };
 };
 
@@ -11,8 +12,10 @@ const reducer = (state: StateType, action: ActionType) => {
     switch (action.type) {
         case 'FETCH_NEWS': {
             return {
-                news: [...state.news, ...action.payload],
-                pageNo: state.pageNo + 1
+                ...state,
+                news: [...state.news, ...action?.payload?.news],
+                pageNo: state.pageNo + 1,
+                totalResults: action?.payload?.totalResults
             };
         }
     }

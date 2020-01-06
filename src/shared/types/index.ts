@@ -5,6 +5,7 @@ export type NewsType = {
 export type StateType = {
     news: Array<string>;
     pageNo: number;
+    totalResults: number;
 };
 
 export type ActionType = {

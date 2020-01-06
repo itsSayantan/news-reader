@@ -1,9 +1,11 @@
-import React, { LegacyRef, RefObject } from 'react';
+import React from 'react';
 
 import NewsArticles from '@Components/NewsArticles/NewsArticles';
 import {
     createInitialState,
-    reducer
+    reducer,
+    StateType,
+    ActionType
 } from '@Shared/reducers/NewsReaderMainReducer';
 
 import './NewsReaderMain.scss';
@@ -24,19 +26,22 @@ const NewsReaderMain: React.FC = (props: any) => {
     React.useEffect(() => getNews(), []);
 
     const getNews = () => {
-        callNewsApi(state.pageNo, 5).then(jsonData => {
+        callNewsApi(state.pageNo, 5).then((jsonData: any) => {
             dispatch({
                 type: 'FETCH_NEWS',
-                payload: jsonData.articles.map((a: any) => {
-                    return {
-                        title: a.title
-                    };
-                })
+                payload: {
+                    news: jsonData.articles.map((a: any) => {
+                        return {
+                            title: a.title
+                        };
+                    }),
+                    totalResults: jsonData?.totalResults
+                }
             });
         });
     };
     React.useEffect(() => {
-        if (state.pageNo > 1) {
+        if (state.pageNo > 1 && state?.totalResults !== state?.news?.length) {
             const target = document.querySelector('#last-article');
             const intersectionObsserverOptions = {
                 root: document.querySelector('.nrm-container'),
@@ -59,7 +64,6 @@ const NewsReaderMain: React.FC = (props: any) => {
     return (
         <div className="nrm-container">
             Latest News
-            <p>Page No: {state.pageNo}</p>
             <NewsArticles news={state.news} />
             <div className="nrm-target" id="target">
                 Loading more news ...
